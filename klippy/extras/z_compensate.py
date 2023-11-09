@@ -22,7 +22,7 @@ class ZCompensateInit:
     def __init__(self, config):
         self.config         = config
         self.printer        = config.get_printer()
-        self.prtouch        = self.printer.lookup_object('prtouch_v2')
+        self.prtouch        = self.printer.lookup_object('prtouch')
         self.gcode          = self.printer.lookup_object('gcode')
         self.tri_wave_ip    = config.get('tri_wave_ip', None)   
         self.shut_down = False
