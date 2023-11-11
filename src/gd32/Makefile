@@ -97,6 +97,7 @@ $(OUT)klipper.bin: $(OUT)klipper.elf $(OUT)hostCrc16.elf
 	$(Q)$(OBJCOPY) -O binary $< $@
 	$(Q)$(OUT)hostCrc16.elf $@
 	$(Q)srec_cat $@ -binary -offset $(CONFIG_FLASH_APPLICATION_ADDRESS) -o $(OUT)klipper.hex -intel 
+#	$(Q)$(OBJCOPY) $< -O ihex $(OUT)klipper.hex
 
 # Flash rules
 flash: $(OUT)klipper.bin
