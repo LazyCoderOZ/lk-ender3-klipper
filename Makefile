@@ -4,7 +4,6 @@
 #
 # This file may be distributed under the terms of the GNU GPLv3 license.
 
-
 # Output directory
 OUT=out/
 
@@ -101,14 +100,10 @@ $(OUT)%.ld: %.lds.S $(OUT)autoconf.h
 	@echo "  Preprocessing $@"
 	$(Q)$(CPP) -I$(OUT) -P -MD -MT $@ $< -o $@
 
+
 $(OUT)klipper.elf: $(OBJS_klipper.elf) $(OUT)src/prtouch_v2.o
 	@echo "  Linking $@"
 	$(Q)$(CC) $(OBJS_klipper.elf) $(OUT)src/prtouch_v2.o $(CFLAGS_klipper.elf) -o $@
-	$(Q)scripts/check-gcc.sh $@ $(OUT)compile_time_request.o
-
-$(OUT)klipper.elf: $(OBJS_klipper.elf)
-	@echo "  Linking $@"
-	$(Q)$(CC) $(OBJS_klipper.elf) $(CFLAGS_klipper.elf) -o $@
 	$(Q)scripts/check-gcc.sh $@ $(OUT)compile_time_request.o
 
 ################ Compile time requests
