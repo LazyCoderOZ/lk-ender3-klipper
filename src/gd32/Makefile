@@ -82,10 +82,21 @@ target-y += $(OUT)klipper.bin
 #	@echo " Creating hex file $@"
 #	$(Q)$(OBJCOPY) -l binary -O ihex $< $@
 
-$(OUT)klipper.bin: $(OUT)klipper.elf
+ifeq ($(CONFIG_MACH_GD32F30X),y)
+$(OUT)src/prtouch_v2.o:
+	$(Q)cp src/prtouch_v2_cm4.o $@
+endif
+
+ifeq ($(CONFIG_MACH_GD32E23X),y)
+$(OUT)src/prtouch_v2.o: 
+	$(Q)cp src/prtouch_v2_cm23.o $@
+endif
+
+$(OUT)klipper.bin: $(OUT)klipper.elf $(OUT)hostCrc16.elf
 	@echo "  Creating bin file $@"
 	$(Q)$(OBJCOPY) -O binary $< $@
-	$(Q)$(OBJCOPY) $< -O ihex $(OUT)klipper.hex
+	$(Q)$(OUT)hostCrc16.elf $@
+	$(Q)srec_cat $@ -binary -offset $(CONFIG_FLASH_APPLICATION_ADDRESS) -o $(OUT)klipper.hex -intel 
 
 # Flash rules
 flash: $(OUT)klipper.bin
