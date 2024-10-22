@@ -36,7 +36,7 @@ class ZCompensateInit:
 
         self.gcode.register_command('Z_OFFSET_CALIBRATION', self.cmd_Z_OFFSET_CALIBRATION, desc=self.cmd_Z_OFFSET_CALIBRATION_help)
         self.gcode.register_command('Z_OFFSET_AUTO', self.cmd_Z_OFFSET_AUTO, desc=self.cmd_Z_OFFSET_AUTO_help)
-        self.gcode.register_command('CRTENSE_NOZZLE_CLEAR', self.cmd_CR10SE_NOZZLE_CLEAR, desc=self.cmd_CR10SE_NOZZLE_CLEAR_help)
+        self.gcode.register_command('CR10SE_NOZZLE_CLEAR', self.cmd_CR10SE_NOZZLE_CLEAR, desc=self.cmd_CR10SE_NOZZLE_CLEAR_help)
 
         self.vs_start_z_pos     = config.getfloat('vs_start_z_pos', default=3, minval=0, maxval=10)
         self.show_msg = config.getboolean('show_msg', default=False)
