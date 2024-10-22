@@ -228,7 +228,7 @@ class ZCompensateInit:
     cmd_CR10SE_NOZZLE_CLEAR_help = "Clear the nozzle on bed."
     def cmd_CR10SE_NOZZLE_CLEAR(self, gcmd):
         self.TEST_SWAP()
-        self.gcode.run_script_from_command('SET_GCODE_OFFSEt Z_ADJUST=%f MOVE=1' %(0 - self.z_offset_move))
+        self.gcode.run_script_from_command('SET_GCODE_OFFSET Z_ADJUST=%f MOVE=1' %(0 - self.z_offset_move))
         self.z_offset_move = 0
         self.bed_mesh   = self.printer.lookup_object('bed_mesh')
         self.toolhead   = self.printer.lookup_object("toolhead")
@@ -249,7 +249,7 @@ class ZCompensateInit:
         #清除调平数据
         mesh = self.bed_mesh.get_mesh()
         self.bed_mesh.set_mesh(None)
-        self.gcode.run_script_from_command('SET_GCODE_OFFSEt Z_ADJUST=%f MOVE=1' %(0 - self.z_offset_move))
+        self.gcode.run_script_from_command('SET_GCODE_OFFSET Z_ADJUST=%f MOVE=1' %(0 - self.z_offset_move))
         self.z_offset_move = 0
         pr_pos_x = random.uniform(self.noz_pos_offset[0], self.noz_pos_offset[1])
         pr_pos_y = random.uniform(self.noz_pos_offset[0], self.noz_pos_offset[1])
@@ -291,7 +291,7 @@ class ZCompensateInit:
         self.pnt_msg('z_offset_new = %f ' %(z_offset_new))
 
         self.z_offset_move = z_offset_old - z_offset_new
-        self.gcode.run_script_from_command('SET_GCODE_OFFSEt Z_ADJUST=%f MOVE=1' % (self.z_offset_move))
+        self.gcode.run_script_from_command('SET_GCODE_OFFSET Z_ADJUST=%f MOVE=1' % (self.z_offset_move))
         # self.print_ary('z_offset_move = %f\n' %(0-z_offset_move), 1, True)
 
         # #把Z轴补偿写到cfg文件中
@@ -302,7 +302,7 @@ class ZCompensateInit:
 
         #如果有错误
         if new_calibrate < 0:
-            self.gcode.run_script_from_command('SET_GCODE_OFFSEt Z_ADJUST=%f MOVE=1' % (-self.z_offset_move))
+            self.gcode.run_script_from_command('SET_GCODE_OFFSET Z_ADJUST=%f MOVE=1' % (-self.z_offset_move))
             self.z_offset_move = 0
             self.ck_and_raise_error(new_calibrate < 0,PR_ERR_CODE_Z_OFFSET_CALIBRATION)
 
@@ -320,7 +320,7 @@ class ZCompensateInit:
     cmd_Z_OFFSET_AUTO_help = "Z offset auto"
     def cmd_Z_OFFSET_AUTO(self, gcmd):   # PRTOUCH_TEST X=20 Y=20 Z=-4 S=0.0125
         self.TEST_SWAP()
-        self.gcode.run_script_from_command('SET_GCODE_OFFSEt Z_ADJUST=%f MOVE=1' %(0 - self.z_offset_move))
+        self.gcode.run_script_from_command('SET_GCODE_OFFSET Z_ADJUST=%f MOVE=1' %(0 - self.z_offset_move))
         self.z_offset_move = 0
         self.cmd_CR10SE_NOZZLE_CLEAR(gcmd)
         self.cmd_Z_OFFSET_CALIBRATION(gcmd)
