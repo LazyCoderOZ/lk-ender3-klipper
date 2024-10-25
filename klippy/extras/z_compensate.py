@@ -1,5 +1,5 @@
 # prtouch support
-# From Creality K1 Klipper source code tree
+# From https://github.com/maphex/klipper.git 
 # Copyright (C) 2018-2021  Creality <wangyulong878@sina.com>
 #
 # This file may be distributed under the terms of the GNU GPLv3 license.
