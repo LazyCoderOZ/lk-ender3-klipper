@@ -52,7 +52,7 @@ class CUSTOM_MACRO:
         # self.prtouch.change_hot_min_temp(self.g28_ext_temp)
         self.bed_temp = gcmd.get_float('BED_TEMP', default=self.default_bed_temp, minval=30.0, maxval=130.0)
         self.leveling_calibration = gcmd.get_int('LEVELING_CALIBRATION', default=1, minval=0, maxval=1)
-        
+
         self.gcode.run_script_from_command('G28')
         if (self.calibration_zoffset_flags == 0):
             self.gcode.run_script_from_command('M104 S%d' % (self.g28_ext_temp))
@@ -68,7 +68,7 @@ class CUSTOM_MACRO:
             else:
                 self.gcode.run_script_from_command('M104S0')
                 self.gcode.run_script_from_command('M107')
-                self.gcode.run_script_from_command('M190 S%d' % (self.bed_temp))    
+                self.gcode.run_script_from_command('M190 S%d' % (self.bed_temp))
             self.gcode.run_script_from_command('BED_MESH_CALIBRATE')
             self.gcode.run_script_from_command('CXSAVE_CONFIG')
 
@@ -118,8 +118,6 @@ class CUSTOM_MACRO:
             self.gcode.run_script_from_command('G1 F12000')
             self.gcode.run_script_from_command('G21')
         pass
-
-    
 
 def load_config(config):
     return CUSTOM_MACRO(config)
